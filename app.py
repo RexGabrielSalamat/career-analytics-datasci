@@ -3,6 +3,16 @@ import pandas as pd
 import plotly.express as px
 import os
 import base64
+import streamlit.components.v1 as components
+
+components.html(
+    """
+    <script data-goatcounter="https://career-analytics.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+    """,
+    height=0,
+    width=0,
+)
 
 # --- HELPER FUNCTIONS FOR CLEAN UI & HTML SEPARATION ---
 
