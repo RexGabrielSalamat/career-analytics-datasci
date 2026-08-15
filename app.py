@@ -13,8 +13,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- HELPER FUNCTIONS FOR CLEAN UI & HTML SEPARATION ---
-
+# --- HELPER FUNCTIONS ---
 def get_image_base64(path):
     """Reads a local image and encodes it as base64."""
     if os.path.exists(path):
@@ -68,7 +67,7 @@ def render_footer(template_path="footer.html"):
         """
         st.markdown(fallback_html, unsafe_allow_html=True)
 
-# 1. Page Config
+# Page Config
 st.set_page_config(
     page_title="AI & Data Science Career Analytics",
     page_icon="📊", 
@@ -76,7 +75,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. Modular CSS Injection
+# Modular CSS Injection
 def load_css(file_name="style.css"):
     if os.path.exists(file_name):
         with open(file_name, "r", encoding="utf-8") as f:
@@ -84,13 +83,13 @@ def load_css(file_name="style.css"):
 
 load_css("style.css")
 
-# 3. Header Section
+# Header Section
 render_header(
     title="AI & Data Science Career Analytics", 
     subtitle="An interactive career analytics dashboard curated by Rex Gabriel."
 )
 
-# 4. Data Loader
+# Data Loader
 @st.cache_data
 def load_data():
     data_dir = "data"
@@ -104,7 +103,7 @@ def load_data():
 df = load_data()
 
 if not df.empty:
-    # --- SIDEBAR BRANDING LOGO ---
+    # --- Sidebar Branding Logo ---
     logo_path = "assets/peter_carter.jpg"
     if os.path.exists(logo_path):
         img_b64 = get_image_base64(logo_path)
@@ -118,10 +117,10 @@ if not df.empty:
     else:
         st.sidebar.title("RG's Project")
 
-    # --- SIDEBAR FILTERS ---
+    # --- Sidebar Filters ---
     st.sidebar.subheader("Filter Analytics")
 
-    # Experience Level Filter
+    # --- Experience Level Filter ---
     if "experience_level" in df.columns:
         all_exp = list(df["experience_level"].unique())
         exp_levels = st.sidebar.multiselect(
@@ -133,7 +132,7 @@ if not df.empty:
     else:
         filtered_df = df.copy()
 
-    # Primary Language Filter
+    # --- Primary Language Filter ---
     if "primary_language" in filtered_df.columns:
         available_langs = sorted(filtered_df["primary_language"].dropna().unique())
         languages = st.sidebar.multiselect(
@@ -143,11 +142,11 @@ if not df.empty:
         )
         filtered_df = filtered_df[filtered_df["primary_language"].isin(languages)]
 
-    # --- SIDEBAR DATASET CITATION ---
+    # --- Sidebar Dataset Citation ---
     st.sidebar.divider()
     render_dataset_card(rows=len(filtered_df), cols=len(filtered_df.columns))
 
-    # --- SIDEBAR SALARY ESTIMATOR WIDGET ---
+    # --- Sidebar Salary Estimator Widget ---
     st.sidebar.divider()
     st.sidebar.subheader("Salary Estimator")
     st.sidebar.caption("Simulate target compensation based on customized parameters:")
@@ -167,7 +166,7 @@ if not df.empty:
             index=1
         )
 
-        # --- ORDINAL EDUCATION SORTING ---
+        # --- Ordinal Education Sorting ---
         edu_order = ["Self-taught", "Bootcamp", "Bachelors", "Masters", "PhD"]
         raw_edu = set(df["education_level"].dropna().unique())
         ordered_edu_options = [e for e in edu_order if e in raw_edu] + sorted(list(raw_edu - set(edu_order)))
@@ -232,7 +231,7 @@ if not df.empty:
         else:
             st.sidebar.warning("No matching records found for this combination.")
 
-    # --- KPI METRICS ---
+    # --- KPI Metrics ---
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Listings Analyzed", f"{len(filtered_df):,}")
     
@@ -253,7 +252,7 @@ if not df.empty:
 
     st.divider()
 
-    # --- TABBED CONTENT ---
+    # --- Tabbed Content ---
     tab1, tab2, tab3, tab4 = st.tabs([
         "Market & Compensation", 
         "AI Adoption & Impact", 
@@ -263,7 +262,7 @@ if not df.empty:
 
     muted_crimson = ["#e63946", "#c1121f", "#f77f00", "#fcbf49", "#4a4e69", "#9a8c98"]
 
-    # --- TAB 1: MARKET & COMPENSATION ---
+    # --- TAB 1: Market & Compensation ---
     with tab1:
         c1, c2 = st.columns(2)
 
@@ -318,7 +317,6 @@ if not df.empty:
                 )
                 st.plotly_chart(fig2, use_container_width=True)
 
-        # --- GLOBAL MAP HEATMAP ---
         st.divider()
         
         # State lock logic for map selection toggle
@@ -433,7 +431,7 @@ if not df.empty:
         else:
             st.info("No records available for the selected cross-border filter.")
 
-    # --- TAB 2: AI ADOPTION & IMPACT ---
+    # --- TAB 2: AI Adoption & Impact ---
     with tab2:
         c3, c4 = st.columns(2)
 
@@ -560,7 +558,7 @@ if not df.empty:
                 )
                 st.plotly_chart(fig6, use_container_width=True)
 
-    # --- TAB 3: CAREER MOBILITY & UPSKILLING ---
+    # --- TAB 3: Career Mobility & Upskilling ---
     with tab3:
         c1, c2 = st.columns(2)
 
@@ -761,12 +759,12 @@ if not df.empty:
                     "education unlocking the highest long-term earning ceilings."
                 )
 
-    # --- TAB 4: DATASET INSPECTOR ---
+    # --- TAB 4: Dataset Inspector ---
     with tab4:
         st.subheader("Raw Data Explorer")
         st.caption("Inspect filtered dataset metrics, schema definitions, and export customized subsets.")
 
-        # 1. Summary Metrics Bar
+        # Summary Metrics Bar
         m1, m2, m3, m4 = st.columns(4)
         m1.metric("Filtered Rows", f"{len(filtered_df):,}")
         m2.metric("Total Attributes", f"{len(filtered_df.columns)}")
@@ -775,7 +773,7 @@ if not df.empty:
 
         st.container(height=15, border=False)
 
-        # 2. Controls Row (Column Selector + CSV Export Button)
+        # Controls Row (Column Selector & CSV Export Button)
         col_select, col_export = st.columns([3, 1], vertical_alignment="bottom")
 
         with col_select:
@@ -811,7 +809,7 @@ if not df.empty:
                 use_container_width=True
             )
 
-        # 3. Dataframe Display
+        # Dataframe Display
         if selected_display_cols:
             st.dataframe(
                 filtered_df[selected_display_cols], 
@@ -821,8 +819,8 @@ if not df.empty:
         else:
             st.info("Please select at least one column to display.")
 
-        # 4. Expandable Schema & Metadata Explorer
-        with st.expander("🔍 Inspect Column Schema & Data Types"):
+        # Expandable Schema & Metadata Explorer
+        with st.expander("Inspect Column Schema & Data Types"):
             schema_df = pd.DataFrame({
                 "Column Name": filtered_df.columns,
                 "Data Type": filtered_df.dtypes.astype(str),
@@ -839,6 +837,6 @@ if not df.empty:
 else:
     st.warning("Please ensure a valid CSV dataset is placed in the 'data/' directory.")
 
-# --- FULL-WIDTH FOOTER ---
+# --- Full-width Footer ---
 st.divider()
 render_footer("footer.html")
