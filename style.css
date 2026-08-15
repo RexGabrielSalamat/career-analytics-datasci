@@ -1,0 +1,133 @@
+/* Base App Background & Typography */
+.stApp {
+    background-color: #0b0e14;
+    color: #e6edf3;
+}
+
+section[data-testid="stSidebar"] {
+    background-color: #11151c !important;
+    border-right: 1px solid #21262d;
+}
+
+/* Header Styles */
+.cyber-header {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #f0f6fc;
+    letter-spacing: -0.5px;
+}
+
+.cyber-header span {
+    color: #e63946;
+}
+
+.cyber-sub {
+    color: #8b949e;
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+}
+
+/* Metric Cards */
+div[data-testid="stMetric"] {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+div[data-testid="stMetricLabel"] {
+    color: #8b949e !important;
+    font-size: 0.85rem !important;
+}
+
+div[data-testid="stMetricValue"] {
+    color: #e63946 !important;
+    font-weight: 700 !important;
+}
+
+/* Navigation Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background-color: #161b22;
+    border-radius: 6px;
+    color: #8b949e;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: #21262d !important;
+    border-color: #e63946 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+hr {
+    border-color: #21262d !important;
+    margin: 1.5rem 0;
+}
+
+/* Sidebar Dataset Citation Box */
+.source-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #8b949e;
+}
+
+.source-card strong {
+    color: #f0f6fc;
+}
+
+/* Custom Footer Styling */
+.footer-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 20px 0px 30px 0px !important;
+    font-family: sans-serif !important;
+    color: #888888 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 30px;
+}
+
+.footer-left {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.footer-title {
+    font-weight: 800 !important;
+    letter-spacing: 1.5px !important;
+    color: #FFFFFF !important;
+    font-size: 14px !important;
+}
+
+.footer-subtitle {
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+    color: #6c757d !important;
+    margin-top: 2px !important;
+}
+
+.footer-right {
+    text-align: right !important;
+    font-size: 11px !important;
+    letter-spacing: 0.8px !important;
+    color: #6c757d !important;
+}
+
+.dot {
+    height: 8px !important;
+    width: 8px !important;
+    background-color: #e63946 !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+    margin-right: 6px !important;
+}
