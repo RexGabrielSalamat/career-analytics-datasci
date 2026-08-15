@@ -8,13 +8,21 @@ import streamlit.components.v1 as components
 components.html(
     """
     <script>
-        // Force GoatCounter to track the parent window's URL
+        var currentPath = '/';
+        try {
+            currentPath = window.parent.location.pathname;
+        } catch (e) {
+            currentPath = window.location.pathname;
+        }
         window.goatcounter = {
-            path: window.parent.location.pathname + window.parent.location.search
+            path: currentPath
         };
     </script>
-    <script data-goatcounter="https://YOUR-CODE.goatcounter.com/count"
+    <script data-goatcounter="https://career-analytics.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
+    <noscript>
+        <img src="https://career-analytics.goatcounter.com/count?p=/dashboard">
+    </noscript>
     """,
     height=0,
     width=0,
