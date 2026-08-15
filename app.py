@@ -7,8 +7,14 @@ import streamlit.components.v1 as components
 
 components.html(
     """
-    <script data-goatcounter="https://career-analytics.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+    <script>
+        // Force GoatCounter to track the parent window's URL
+        window.goatcounter = {
+            path: window.parent.location.pathname + window.parent.location.search
+        };
+    </script>
+    <script data-goatcounter="https://YOUR-CODE.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
     """,
     height=0,
     width=0,
