@@ -3,29 +3,14 @@ import pandas as pd
 import plotly.express as px
 import os
 import base64
-import streamlit.components.v1 as components
 
-components.html(
+st.markdown(
     """
-    <script>
-        var currentPath = '/';
-        try {
-            currentPath = window.parent.location.pathname;
-        } catch (e) {
-            currentPath = window.location.pathname;
-        }
-        window.goatcounter = {
-            path: currentPath
-        };
-    </script>
-    <script data-goatcounter="https://career-analytics.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
-    <noscript>
-        <img src="https://career-analytics.goatcounter.com/count?p=/dashboard">
-    </noscript>
+    <img src="https://career-analytics.goatcounter.com/count?p=/&t=Career+Analytics" 
+         style="display:none;" 
+         alt="" />
     """,
-    height=0,
-    width=0,
+    unsafe_allow_html=True,
 )
 
 # --- HELPER FUNCTIONS FOR CLEAN UI & HTML SEPARATION ---
